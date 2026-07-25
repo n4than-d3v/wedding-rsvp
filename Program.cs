@@ -1,10 +1,25 @@
+using Microsoft.EntityFrameworkCore;
 using Wedding.Components;
+using Wedding.Database;
+using Wedding.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents();
 
+builder.Services.AddDbContext<WeddingContext>(opt =>
+    opt.UseNpgsql(
+        builder.Configuration.GetConnectionString("PostgreSQL")));
+
+builder.Services.AddScoped<IGuestService, GuestService>();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<WeddingContext>();
+    context.Database.Migrate();
+}
 
 if (!app.Environment.IsDevelopment())
 {

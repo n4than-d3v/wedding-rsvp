@@ -1,0 +1,107 @@
+﻿@page "/qr/{token}"
+
+@using Wedding.Services
+@using Wedding.Commands
+@using Wedding.DTOs
+
+@inject IGuestService _service
+@inject NavigationManager Navigation
+
+<PageTitle>October 3rd</PageTitle>
+
+@if (party != null)
+{
+    <form method="post" data-enhance @onsubmit="OnSubmit" @formname="Rsvp">
+        <AntiforgeryToken />
+
+        <div class="center">
+            <h1>RSVP</h1>
+
+            <h1 class="tiny">THE WEDDING OF</h1>
+            <p class="fancy">Nathan &amp; Alex</p>
+        </div>
+
+        <p>We are delighted to invite you to our special day</p>
+
+        <p>
+            <strong>Location:</strong>
+            Northbrook Park, Farnham, Surrey, GU10 5EU
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            3<sup>rd</sup> October 2027
+        </p>
+
+        <h2>Guests in your party</h2>
+
+        <p>Please confirm who in your party will be attending</p>
+
+        @foreach (var guest in party.Guests)
+        {
+            <div>
+                <input type="checkbox"
+                    id="guest-@guest.Id"
+                    name="GuestsComing"
+                    value="@guest.Id"
+                    checked="@(guest.Coming == true)" />
+
+                <label for="guest-@guest.Id">
+                    @guest.Name
+                </label>
+            </div>
+        }
+
+        <div>        
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Email" value="@party.Email" />
+        </div>
+
+        <div>        
+            <label for="diet">Dietary restrictions</label>
+            <textarea type="text" id="diet" name="Diet" rows="2">@party.Diet</textarea>
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+}
+
+@code
+{
+    [Parameter]
+    public string Token { get; set; }
+
+    [SupplyParameterFromForm]
+    public string Email { get; set; } = string.Empty;
+
+    [SupplyParameterFromForm]
+    public string Diet { get; set; } = string.Empty;
+
+    [SupplyParameterFromForm]
+    public int[] GuestsComing { get; set; } = [];
+
+    private PartyDto? party = null;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        party = await _service.GetPartyByToken(Token);
+        
+        if (party == null)
+        {
+            Navigation.NavigateTo("/not-found");
+        }
+    }
+
+    private async Task OnSubmit()
+    {
+        var command = new RsvpCommand
+        {
+            Token = Token,
+            Email = Email,
+            Diet = Diet,
+            GuestsComing = GuestsComing
+        };
+
+        await _service.Rsvp(command);
+    }
+}
