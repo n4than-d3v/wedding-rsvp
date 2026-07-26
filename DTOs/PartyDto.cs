@@ -7,6 +7,8 @@ public class PartyDto
     public string Token { get; set; }
 
     public string Name { get; set; }
+
+    public byte Arrival { get; set; }
     
     public DateTime? Seen { get; set; }
 
@@ -15,6 +17,8 @@ public class PartyDto
     public string? Email { get; set; }
 
     public string? Diet { get; set; }
+
+    public bool? RequestAccomodation { get; set; }
 
     public List<GuestDto> Guests { get; set; }
 }

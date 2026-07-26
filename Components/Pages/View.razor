@@ -13,56 +13,96 @@
 {
     <form method="post" data-enhance @onsubmit="OnSubmit" @formname="Rsvp">
         <AntiforgeryToken />
+            
+        <img id="top-left-img" class="top-images" src="@Assets["images/floral-top-left.png"]" alt="" />
+        <img id="top-right-img" class="top-images" src="@Assets["images/floral-top-right.png"]" alt="" />
 
-        <div class="center">
-            <h1>RSVP</h1>
-
-            <h1 class="tiny">THE WEDDING OF</h1>
-            <p class="fancy">Nathan &amp; Alex</p>
+        <div class="heading">
+            <h2>THE WEDDING OF</h2>
+            <h3>Nathan &amp; Alex</h3>
         </div>
 
-        <p>We are delighted to invite you to our special day</p>
-
-        <p>
-            <strong>Location:</strong>
-            Northbrook Park, Farnham, Surrey, GU10 5EU
+        <p class="invite">
+            We are excited to announce that we will be getting married on the
+            <strong>3rd October 2027</strong>, and would be thrilled if you could join
+            us in celebration of our love on our special day.
         </p>
-
-        <p>
-            <strong>Date:</strong>
-            3<sup>rd</sup> October 2027
-        </p>
-
-        <h2>Guests in your party</h2>
-
-        <p>Please confirm who in your party will be attending</p>
-
-        @foreach (var guest in party.Guests)
+        
+        @if (party.Arrival == 0)
         {
-            <div>
-                <input type="checkbox"
-                    id="guest-@guest.Id"
-                    name="GuestsComing"
-                    value="@guest.Id"
-                    checked="@(guest.Coming == true)" />
-
-                <label for="guest-@guest.Id">
-                    @guest.Name
-                </label>
-            </div>
+            <p class="arrival">Please arrive on Friday 1st October after 5 pm.</p>
+        }
+        else if (party.Arrival == 1)
+        {
+            <p class="arrival">Please arrive on Saturday 2nd October at 10 am.</p>
+        }
+        else if (party.Arrival == 2)
+        {
+            <p class="arrival">Please arrive on Sunday 3rd October by 11 am.</p>
         }
 
-        <div>        
+        <h2 class="section-heading">Guests in your party</h2>
+
+        <p class="additional-info">Please confirm who in your party will be attending by checking their name</p>
+
+        <div class="guests">
+            @foreach (var guest in party.Guests)
+            {
+                <label class="guest" for="guest-@guest.Id">
+                    <input type="checkbox"
+                        id="guest-@guest.Id"
+                        name="GuestsComing"
+                        value="@guest.Id"
+                        checked="@(guest.Coming == true)" />
+                    <span class="box">
+                        <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <title/>
+                            <g id="Complete">
+                                <g id="tick">
+                                    <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+                    <span class="name">
+                        @guest.Name
+                    </span>
+                </label>
+            }
+        </div>
+
+        <h2 class="section-heading">Important details</h2>
+
+        <div class="field">        
             <label for="email">Email</label>
             <input type="email" id="email" name="Email" value="@party.Email" />
         </div>
 
-        <div>        
-            <label for="diet">Dietary restrictions</label>
-            <textarea type="text" id="diet" name="Diet" rows="2">@party.Diet</textarea>
+        <div class="field">        
+            <label for="diet">Diet</label>
+            <input type="text" id="diet" name="Diet" value="@party.Diet" />
         </div>
 
-        <button type="submit">Save</button>
+        <p class="additional-info accomodation">There is on-site accomodation, although limited. If you would like to stay on-site overnight, please let us know and we will try to accomodate you.</p>
+
+        <div class="accomodation-field">
+            <input type="checkbox"
+                id="accomodation"
+                name="RequestAccomodation"
+                checked="@party.RequestAccomodation" />
+            <label for="accomodation">
+                I would like accomodation
+            </label>
+        </div>
+
+        <button type="submit">
+            <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.3009 13.6949L20.102 3.89742M10.5795 14.1355L12.8019 18.5804C13.339 19.6545 13.6075 20.1916 13.9458 20.3356C14.2394 20.4606 14.575 20.4379 14.8492 20.2747C15.1651 20.0866 15.3591 19.5183 15.7472 18.3818L19.9463 6.08434C20.2845 5.09409 20.4535 4.59896 20.3378 4.27142C20.2371 3.98648 20.013 3.76234 19.7281 3.66167C19.4005 3.54595 18.9054 3.71502 17.9151 4.05315L5.61763 8.2523C4.48114 8.64037 3.91289 8.83441 3.72478 9.15032C3.56153 9.42447 3.53891 9.76007 3.66389 10.0536C3.80791 10.3919 4.34498 10.6605 5.41912 11.1975L9.86397 13.42C10.041 13.5085 10.1295 13.5527 10.2061 13.6118C10.2742 13.6643 10.3352 13.7253 10.3876 13.7933C10.4468 13.87 10.491 13.9585 10.5795 14.1355Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>
+                Send RSVP
+            </span>
+        </button>
     </form>
 }
 
@@ -79,6 +119,9 @@
 
     [SupplyParameterFromForm]
     public int[] GuestsComing { get; set; } = [];
+
+    [SupplyParameterFromForm]
+    public string RequestAccomodation { get; set; } = "off";
 
     private PartyDto? party = null;
 
@@ -99,9 +142,11 @@
             Token = Token,
             Email = Email,
             Diet = Diet,
-            GuestsComing = GuestsComing
+            GuestsComing = GuestsComing,
+            RequestAccomodation = "on" == RequestAccomodation
         };
 
         await _service.Rsvp(command);
+        Navigation.Refresh();
     }
 }
