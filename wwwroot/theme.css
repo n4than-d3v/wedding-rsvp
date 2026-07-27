@@ -179,14 +179,14 @@ h1 {
   margin-bottom: 0.125rem;
 }
 
-button {
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5em;
 }
 
-button {
+.button {
   margin-top: 0.75rem;
   font-family: "Chakra Petch";
   cursor: pointer;
@@ -194,12 +194,59 @@ button {
   border: solid 1px rgb(229, 182, 227);
   font-weight: bold;
   color: black;
-  width: 100%;
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  font-size: 1rem;
 }
 
-button svg {
+button.button {
+  width: 100%;
+}
+
+a.button {
+  max-width: 100%;
+}
+
+.button svg {
   max-width: 1em;
   max-height: 1em;
+}
+
+.read-only .guest {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0rem;
+  cursor: initial;
+}
+
+.read-only .guest .name {
+  flex: 1;
+  color: black;
+}
+
+.read-only .guest .coming,
+.read-only .guest .not-coming {
+  font-family: "Chakra Petch";
+  font-size: 0.85rem;
+  padding: 0.125rem 0.25rem;
+  color: black;
+}
+
+.read-only .guest .coming {
+  background-color: rgb(238, 189, 240);
+}
+
+.read-only .guest .not-coming {
+  background-color: rgb(243, 180, 180);
+}
+
+.read-only input {
+  background-color: transparent;
+  color: black;
+}
+
+.read-only a:not(.button) {
+  color: rgb(116, 45, 97);
 }

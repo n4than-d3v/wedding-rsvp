@@ -1,0 +1,32 @@
+@page "/qr/{token}"
+
+@using Wedding.Services
+
+@inject IGuestService _service
+@inject NavigationManager Navigation
+
+<PageTitle>October 3rd</PageTitle>
+
+@code
+{
+    [Parameter]
+    public string Token { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var party = await _service.GetPartyByToken(Token);
+        
+        if (party == null)
+        {
+            Navigation.NavigateTo("/not-found");
+        }
+        else if (party.Responded == null)
+        {
+            Navigation.NavigateTo($"/qr/{Token}/respond");
+        }
+        else
+        {
+            Navigation.NavigateTo($"/qr/{Token}/details");
+        }
+    }
+}

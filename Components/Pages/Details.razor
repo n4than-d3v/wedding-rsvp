@@ -1,0 +1,158 @@
+@page "/qr/{token}/details"
+
+@using Wedding.Services
+@using Wedding.Commands
+@using Wedding.DTOs
+
+@inject IGuestService _service
+@inject NavigationManager Navigation
+
+<PageTitle>October 3rd</PageTitle>
+
+@if (party != null)
+{            
+    <div class="read-only">
+        <img id="top-left-img" class="top-images" src="@Assets["images/floral-top-left.png"]" alt="" />
+        <img id="top-right-img" class="top-images" src="@Assets["images/floral-top-right.png"]" alt="" />
+
+        <div class="heading">
+            <h2>THE WEDDING OF</h2>
+            <h3>Nathan &amp; Alex</h3>
+        </div>
+
+        @if (party.Guests.Any(x => x.Coming ?? false))
+        {
+            <p class="invite">
+                Thank you for confirming your attendance!
+            </p>
+
+            @if (party.Arrival == 0)
+            {
+                <p class="arrival">Please arrive on Friday 1st October after 5 pm.</p>
+            }
+            else if (party.Arrival == 1)
+            {
+                <p class="arrival">Please arrive on Saturday 2nd October at 10 am.</p>
+            }
+            else if (party.Arrival == 2)
+            {
+                <p class="arrival">Please arrive on Sunday 3rd October by 11 am.</p>
+            }
+
+            <h2 class="section-heading">Guests in your party</h2>
+
+            <div class="guests">
+                @foreach (var guest in party.Guests)
+                {
+                    <p class="guest">
+                        <span class="name">
+                            @guest.Name
+                        </span>
+                        @if (guest.Coming ?? false)
+                        {
+                            <span class="coming">
+                                Coming
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="not-coming">
+                                Not coming
+                            </span>
+                        }
+                    </p>
+                }
+            </div>
+
+            <h2 class="section-heading">Important details</h2>
+
+            <div class="field">        
+                <label for="email">Email</label>
+                <input type="email" disabled id="email" name="Email" value="@party.Email" />
+            </div>
+
+            <div class="field">        
+                <label for="diet">Diet</label>
+                <input type="text" disabled id="diet" name="Diet" value="@party.Diet" />
+            </div>
+
+            @if (party.RequestAccomodation ?? false)
+            {
+                <p class="additional-info">You have requested accomodation. We will get in touch with further details closer to the date.</p>
+            }
+            else
+            {
+                <p class="additional-info">You said you wouldn't require accomodation. Please use the details on this page to plan logistics.</p>
+            }
+
+            <h2 class="section-heading">Location</h2>
+
+            <p class="additional-info">Northbrook Park, Farnham, Surrey, GU10 5EU<br />
+                <a href="https://maps.app.goo.gl/3qvEmagQSuWTUHHA9">Google Maps</a> / 
+                <a href="https://maps.apple.com/place?place-id=I56E449A718A52351">Apple Maps</a>
+            </p>
+
+            <h2 class="section-heading">Nearest train station</h2>
+
+            <p class="additional-info">
+                <a href="https://www.nationalrail.co.uk/stations/farnham">Farnham</a> (2 miles)
+            </p>
+
+            <h2 class="section-heading">Nearest hotels</h2>
+
+            <p class="additional-info">
+                <a href="https://www.farnhamhousehotel.com/">Farnham House Hotel</a> (1 mile)<br />
+                <a href="https://farnhambush.com/reserve/">Bush Hotel Farnham</a> (2 miles)<br />
+                <a href="https://www.tellersarmsfarnham.co.uk/bedrooms/">Teller's Arms</a> (2 miles)
+            </p>
+
+            <h2 class="section-heading">Local taxis</h2>
+
+            <p class="additional-info">
+                Taxis are usually waiting at Farnham station. If there aren't any, here are some options:<br />
+                <a href="https://farnham24hour-taxis.co.uk">Farnham 24 Hour Taxis</a> (01252 280 280)<br />
+                <a href="https://www.farnham-taxis.com/">Prime Taxis Farnham</a> (01252 507 777)<br />
+                <a href="https://vgtravel.co.uk/taxis-farnham/">VGT Taxis Farnham</a> (01252 737 475)
+            </p>
+
+            <h2 class="section-heading">Coming from abroad?</h2>
+
+            <p class="additional-info">
+                To enter the UK without a British passport, you need an Electronic Travel Authorisation (ETA).<br />
+                Please <a href="https://www.gov.uk/check-uk-visa">check if you need an ETA</a>.<br />
+                If you do, <a href="https://www.gov.uk/eta/apply">apply for an ETA</a>
+            </p>
+        }
+        else
+        {
+            <p class="invite">
+                We're sorry to hear that you're unable to come!
+            </p>
+            <p class="invite">
+                Hopefully we'll be able to see each other and catch up another time.
+            </p>
+        }
+
+        <NavLink class="button" href="@($"/qr/{Token}/respond")">
+            <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M21.1213 2.70705C19.9497 1.53548 18.0503 1.53547 16.8787 2.70705L15.1989 4.38685L7.29289 12.2928C7.16473 12.421 7.07382 12.5816 7.02986 12.7574L6.02986 16.7574C5.94466 17.0982 6.04451 17.4587 6.29289 17.707C6.54127 17.9554 6.90176 18.0553 7.24254 17.9701L11.2425 16.9701C11.4184 16.9261 11.5789 16.8352 11.7071 16.707L19.5556 8.85857L21.2929 7.12126C22.4645 5.94969 22.4645 4.05019 21.2929 2.87862L21.1213 2.70705ZM18.2929 4.12126C18.6834 3.73074 19.3166 3.73074 19.7071 4.12126L19.8787 4.29283C20.2692 4.68336 20.2692 5.31653 19.8787 5.70705L18.8622 6.72357L17.3068 5.10738L18.2929 4.12126ZM15.8923 6.52185L17.4477 8.13804L10.4888 15.097L8.37437 15.6256L8.90296 13.5112L15.8923 6.52185ZM4 7.99994C4 7.44766 4.44772 6.99994 5 6.99994H10C10.5523 6.99994 11 6.55223 11 5.99994C11 5.44766 10.5523 4.99994 10 4.99994H5C3.34315 4.99994 2 6.34309 2 7.99994V18.9999C2 20.6568 3.34315 21.9999 5 21.9999H16C17.6569 21.9999 19 20.6568 19 18.9999V13.9999C19 13.4477 18.5523 12.9999 18 12.9999C17.4477 12.9999 17 13.4477 17 13.9999V18.9999C17 19.5522 16.5523 19.9999 16 19.9999H5C4.44772 19.9999 4 19.5522 4 18.9999V7.99994Z" fill="#000000"/>
+            </svg>
+            <span>
+                Change details
+            </span>
+        </NavLink>
+    </div>
+}
+
+@code
+{
+    [Parameter]
+    public string Token { get; set; }
+
+    private PartyDto? party = null;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        party = await _service.GetPartyByToken(Token);
+    }
+}
