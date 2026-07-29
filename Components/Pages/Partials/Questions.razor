@@ -1,0 +1,48 @@
+@using Wedding.Services
+@inject IContext _context
+
+<h2 id="questions">@_context.GetMessage("questions")</h2>
+
+<div class="field">        
+    <label for="email">@_context.GetMessage("questions.email")</label>
+    <input type="email" id="email" name="Email" value="@_context.Party!.Email" />
+</div>
+
+<div class="field">        
+    <label for="diet">@_context.GetMessage("questions.diet")</label>
+    <input type="text" id="diet" name="Diet" value="@_context.Party!.Diet" />
+</div>
+
+@if (_context.Party.Housed)
+{
+    <p id="housed">@_context.GetMessage("housed")</p>
+}
+
+<style>
+    .field {
+        margin-bottom: 0.25rem;
+        padding-bottom: 0.125rem;
+    }
+
+    .field label {
+        font-size: 0.8rem;
+        padding-left: 0.125rem;
+        color: rgb(36, 36, 36);
+        margin-bottom: 0.25rem;
+    }
+
+    .field input {
+        width: 80%;
+        font-size: 0.85rem;
+        padding: 0.125rem 0.25rem;
+        background-color: rgba(0, 0, 0, 0.15);
+        border: none;
+        outline: none;
+        margin-bottom: 0.25rem;
+    }
+
+    #housed {
+        font-size: 0.8rem;
+        margin-bottom: 0.125rem;
+    }
+</style>

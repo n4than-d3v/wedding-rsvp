@@ -9,6 +9,4 @@ public class RsvpCommand
     public required int[] GuestsComing { get; set; }
 
     public string? Diet { get; set; }
-
-    public bool RequestAccomodation { get; set; }    
 }

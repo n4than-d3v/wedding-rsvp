@@ -41,7 +41,6 @@ public class GuestService(WeddingContext database) : IGuestService
         party.Responded = DateTime.UtcNow;
         party.Email = command.Email;
         party.Diet = command.Diet;
-        party.RequestAccomodation = command.RequestAccomodation;
 
         foreach (var guest in party.Guests)
         {
@@ -63,7 +62,7 @@ public class GuestService(WeddingContext database) : IGuestService
         Email = party.Email,
         Diet = party.Diet,
         Arrival = party.Arrival,
-        RequestAccomodation = party.RequestAccomodation,
+        Housed = party.Housed,
         Guests = [.. party.Guests.Select(g => new GuestDto
         {
             Id = g.Id,

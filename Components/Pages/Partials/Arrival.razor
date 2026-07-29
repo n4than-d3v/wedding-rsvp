@@ -1,0 +1,24 @@
+@using Wedding.Services
+@inject IContext _context
+
+@if (_context.Party!.Arrival == 0)
+{
+    <p id="arrival">@_context.GetMessage("arrival.friday")</p>
+}
+else if (_context.Party!.Arrival == 1)
+{
+    <p id="arrival">@_context.GetMessage("arrival.saturday")</p>
+}
+else if (_context.Party!.Arrival == 2)
+{
+    <p id="arrival">@_context.GetMessage("arrival.sunday")</p>
+}
+
+<style>
+    #arrival {
+        font-size: 1rem;
+        line-height: 1.25rem;
+        margin: 0rem;
+        margin-bottom: 0.5rem;
+    }
+</style>

@@ -1,0 +1,62 @@
+@using Wedding.Services
+@inject IContext _context
+
+<h2 id="guests">@_context.GetMessage("guests")</h2>
+
+<div class="guests">
+    @foreach (var guest in _context.Party!.Guests.OrderBy(g => g.Id))
+    {
+        <p class="guest">
+            <span class="name">
+                @guest.Name
+            </span>
+            @if (guest.Coming ?? false)
+            {
+                <span class="coming">
+                    @_context.GetMessage("guests.coming")
+                </span>
+            }
+            else
+            {
+                <span class="not-coming">
+                    @_context.GetMessage("guests.not-coming")
+                </span>
+            }
+        </p>
+    }
+</div>
+
+<style>
+    .guest {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0rem;
+        padding-bottom: 0.25rem;
+        border-bottom: dotted 2px grey;
+        margin-bottom: 0.25rem;
+        font-size: 1.125rem;
+        color: rgb(68, 68, 68);
+    }
+
+    .guest .name {
+        flex: 1;
+        color: black;
+    }
+
+    .guest .coming,
+    .guest .not-coming {
+        font-size: 0.85rem;
+        padding: 0.125rem 0.25rem;
+        color: black;
+    }
+
+    .guest .coming {
+        background-color: rgb(238, 189, 240);
+    }
+
+    .guest .not-coming {
+        background-color: rgb(243, 180, 180);
+    }
+</style>

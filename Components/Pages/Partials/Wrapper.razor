@@ -1,0 +1,92 @@
+@using Wedding.Services
+@inject IContext _context
+
+<h1 id="rsvp">@_context.GetMessage("title")</h1>
+
+<main>
+    <img id="top-left-img" class="top-image" src="@Assets["images/floral-top-left.png"]" alt="" />
+    <img id="top-right-img" class="top-image" src="@Assets["images/floral-top-right.png"]" alt="" />
+
+    <header>
+        <h2 id="tagline">@_context.GetMessage("subtitle")</h2>
+        <h3 id="names">@_context.GetMessage("our-names")</h3>
+    </header>
+
+    @ChildContent
+</main>
+
+<style>
+    html, body {
+        margin: 0rem;
+        padding: 0rem;
+    }
+
+    body {
+        background-image: var(--background-image);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-color: #000;
+        background-attachment: fixed;
+    }
+
+    main {
+        border-radius: 0.75rem;
+        border: solid 1px rgba(0, 0, 0, 0.125);
+        background: rgba(255, 255, 255, 0.8);
+        min-width: min(20rem, 80vw);
+        max-width: min(20rem, 80vw);
+        margin: 0rem auto 1rem auto;
+        padding: 0.5rem 0.75rem;
+        position: relative;
+    }
+
+    #rsvp {
+        font-size: 2.25rem;
+        text-align: center;
+        margin: 0.5rem auto 0.5rem;
+    }
+
+    .top-image {
+        max-width: 35%;
+        position: absolute;
+    }
+
+    #top-left-img {
+        top: -1.25rem;
+        left: -1.75rem;
+    }
+
+    #top-right-img {
+        top: -1.25rem;
+        right: -1.75rem;
+    }
+
+    header {
+        margin-top: 1rem;
+        margin-bottom: 1.35rem;
+    }
+
+    header * {
+        padding: 0rem;
+        margin: 0rem;
+    }
+
+    header #tagline {
+        font-size: 0.8rem;
+        color: rgb(87, 87, 87);
+        text-align: center;
+        font-family: "Cinzel", serif;
+    }
+
+    header #names {
+        font-size: 2.25rem;
+        text-align: center;
+    }    
+</style>
+
+@code
+{
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+}

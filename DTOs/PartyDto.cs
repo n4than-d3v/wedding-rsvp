@@ -9,6 +9,8 @@ public class PartyDto
     public string Name { get; set; }
 
     public byte Arrival { get; set; }
+
+    public bool Housed { get; set; }
     
     public DateTime? Seen { get; set; }
 
@@ -18,7 +20,7 @@ public class PartyDto
 
     public string? Diet { get; set; }
 
-    public bool? RequestAccomodation { get; set; }
-
     public List<GuestDto> Guests { get; set; }
+
+    public bool AnyComing => Guests?.Any(x => x.Coming ?? false) ?? false;
 }

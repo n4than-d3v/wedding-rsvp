@@ -12,6 +12,8 @@ public class Party
     public string Name { get; set; }
 
     public byte Arrival { get; set; }
+
+    public bool Housed { get; set; }
     
     public DateTime? Seen { get; set; }
 
@@ -20,8 +22,6 @@ public class Party
     public string? Email { get; set; }
 
     public string? Diet { get; set; }
-
-    public bool? RequestAccomodation { get; set; }
 
     public List<Guest> Guests { get; set; }
 }
