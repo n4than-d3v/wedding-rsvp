@@ -5,7 +5,7 @@
 
 <div class="field">        
     <label for="email">@_context.GetMessage("questions.email")</label>
-    <input type="email" id="email" name="Email" value="@_context.Party!.Email" />
+    <input type="email" id="email" name="Email" value="@_context.Party!.Email" autocomplete="email" />
 </div>
 
 <div class="field">        
@@ -25,24 +25,22 @@
     }
 
     .field label {
-        font-size: 0.8rem;
         padding-left: 0.125rem;
         color: rgb(36, 36, 36);
         margin-bottom: 0.25rem;
     }
 
     .field input {
-        width: 80%;
-        font-size: 0.85rem;
+        width: 75%;
         padding: 0.125rem 0.25rem;
-        background-color: rgba(0, 0, 0, 0.15);
+        background-color: rgba(255, 255, 255, 0.55);
         border: none;
+        border-bottom: dotted 2px grey;
         outline: none;
         margin-bottom: 0.25rem;
     }
 
     #housed {
-        font-size: 0.8rem;
         margin-bottom: 0.125rem;
     }
 </style>

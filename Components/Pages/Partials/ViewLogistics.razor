@@ -33,14 +33,20 @@
 
 <h2 class="heading">@_context.GetMessage("logistics.abroad")</h2>
 
+<p class="info push">
+    @_context.GetMessage("logistics.abroad.eta.before")<a href="https://www.gov.uk/check-uk-visa">@_context.GetMessage("logistics.abroad.eta.link")</a>@_context.GetMessage("logistics.abroad.eta.after")
+</p>
+
 <p class="info">
-    @_context.GetMessage("logistics.abroad.eta")<br />
-    @_context.GetMessage("logistics.abroad.eta.check.before")<a href="https://www.gov.uk/check-uk-visa">@_context.GetMessage("logistics.abroad.eta.check.link")</a>@_context.GetMessage("logistics.abroad.eta.check.after")<br />
-    @_context.GetMessage("logistics.abroad.eta.apply.before")<a href="https://www.gov.uk/eta/apply">@_context.GetMessage("logistics.abroad.eta.apply.link") </a>@_context.GetMessage("logistics.abroad.eta.apply.after")
+    @_context.GetMessage("logistics.abroad.eta.warning")
 </p>
 
 <style>
     .info a:not(.button) {
         color: rgb(116, 45, 97);
+    }
+
+    .push {
+        margin-bottom: 0.5rem;
     }
 </style>

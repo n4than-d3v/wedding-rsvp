@@ -1,3 +1,64 @@
-p, label {
-    font-family: "Cormorant Garamond", serif;
+#rsvp {
+    font-family: "BJCree", "Times New Roman", Times, serif;
+}
+
+#tagline {
+    font-family: "Cinzel", "Times New Roman", Times, serif;
+    font-size: 0.875rem;
+}
+
+#names {
+    font-family: "Cormorant Upright", "Times New Roman", Times, serif;
+    font-size: 2.125rem;
+}
+
+.sorry, .thank-you, .answer, .info, #arrival, #invitation, #confirm-guests {
+    font-family: "Lora", "Times New Roman", Times, serif;
+    font-size: 0.825rem;
+    margin: 0rem;
+}
+
+.answer {
+    margin-bottom: 0.25rem;
+}
+
+#confirm-guests {
+    margin-bottom: 0.75rem;
+}
+
+h2 {
+    font-family: "Cormorant Garamond", "Times New Roman", Times, serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.guest .name {
+    font-family: "Cormorant Upright", "Times New Roman", Times, serif;
+    font-size: 1.125rem;
+}
+
+.guest .coming,
+.guest .not-coming {
+    font-family: "Helvetica", "Times New Roman", Times, serif;
+    font-size: 0.75rem;
+}
+
+label {
+    font-family: "Lora", "Times New Roman", Times, serif;
+    font-size: 0.825rem;
+}
+
+input[type="text"],
+input[type="email"] {
+    font-family: "Lora", "Times New Roman", Times, serif;
+    font-size: 0.875rem;
+}
+
+.button {
+    font-family: "Lora", "Times New Roman", Times, serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.info a {
 }

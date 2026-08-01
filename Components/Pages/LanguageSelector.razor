@@ -1,0 +1,172 @@
+@page "/invite/{token}"
+
+@using Wedding.Components.Pages.Partials
+@using Wedding.Services
+
+@inject IContext _context
+@inject NavigationManager Navigation
+
+<PageTitle>October 3rd</PageTitle>
+
+<Wrapper>
+    <div class="languages">
+        <form method="post" data-enhance @onsubmit="SetLangEn" @formname="SetLangEn">
+            <AntiforgeryToken />
+
+            <button class="language" type="submit">
+                <span>
+                    English
+                </span>
+                <svg width="800px" height="800px" viewBox="0 -4 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_503_2952)">
+                    <rect width="28" height="20" rx="2" fill="white"/>
+                    <mask id="mask0_503_2952" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="28" height="20">
+                    <rect width="28" height="20" rx="2" fill="white"/>
+                    </mask>
+                    <g mask="url(#mask0_503_2952)">
+                    <rect width="28" height="20" fill="#0A17A7"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M-1.28244 -1.91644L10.6667 6.14335V-1.33333H17.3334V6.14335L29.2825 -1.91644L30.7737 0.294324L21.3263 6.66667H28V13.3333H21.3263L30.7737 19.7057L29.2825 21.9165L17.3334 13.8567V21.3333H10.6667V13.8567L-1.28244 21.9165L-2.77362 19.7057L6.67377 13.3333H2.95639e-05V6.66667H6.67377L-2.77362 0.294324L-1.28244 -1.91644Z" fill="white"/>
+                    <path d="M18.668 6.33219L31.3333 -2" stroke="#DB1F35" stroke-width="0.666667" stroke-linecap="round"/>
+                    <path d="M20.0128 13.6975L31.3666 21.3503" stroke="#DB1F35" stroke-width="0.666667" stroke-linecap="round"/>
+                    <path d="M8.00555 6.31046L-3.83746 -1.67099" stroke="#DB1F35" stroke-width="0.666667" stroke-linecap="round"/>
+                    <path d="M9.29006 13.6049L-3.83746 22.3105" stroke="#DB1F35" stroke-width="0.666667" stroke-linecap="round"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 12H12V20H16V12H28V8H16V0H12V8H0V12Z" fill="#E6273E"/>
+                    </g>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_503_2952">
+                    <rect width="28" height="20" rx="2" fill="white"/>
+                    </clipPath>
+                    </defs>
+                </svg>
+            </button>
+        </form>
+        <form method="post" data-enhance @onsubmit="SetLangRo" @formname="SetLangRo">
+            <AntiforgeryToken />
+
+            <button class="language" type="submit">
+                <span>
+                    Română
+                </span>
+                <svg width="800px" height="800px" viewBox="0 -4 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_503_2626)">
+                    <rect width="28" height="20" rx="2" fill="white"/>
+                    <mask id="mask0_503_2626" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="28" height="20">
+                    <rect width="28" height="20" rx="2" fill="white"/>
+                    </mask>
+                    <g mask="url(#mask0_503_2626)">
+                    <rect x="13.3333" width="14.6667" height="20" fill="#E5253D"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 20H9.33333V0H0V20Z" fill="#0A3D9C"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.33331 20H18.6666V0H9.33331V20Z" fill="#FFD955"/>
+                    </g>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_503_2626">
+                    <rect width="28" height="20" rx="2" fill="white"/>
+                    </clipPath>
+                    </defs>
+                </svg>
+            </button>
+        </form>
+        <form method="post" data-enhance @onsubmit="SetLangJp" @formname="SetLangJp">
+            <AntiforgeryToken />
+
+            <button class="language" type="submit">
+                <span>
+                    日本語
+                </span>
+                <svg width="800px" height="800px" viewBox="0 -4 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_503_3081)">
+                    <rect x="0.25" y="0.25" width="27.5" height="19.5" rx="1.75" fill="white" stroke="#F5F5F5" stroke-width="0.5"/>
+                    <mask id="mask0_503_3081" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="28" height="20">
+                    <rect x="0.25" y="0.25" width="27.5" height="19.5" rx="1.75" fill="white" stroke="white" stroke-width="0.5"/>
+                    </mask>
+                    <g mask="url(#mask0_503_3081)">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14 16C17.3137 16 20 13.3137 20 10C20 6.68629 17.3137 4 14 4C10.6863 4 8 6.68629 8 10C8 13.3137 10.6863 16 14 16Z" fill="url(#paint0_linear_503_3081)"/>
+                    </g>
+                    </g>
+                    <defs>
+                    <linearGradient id="paint0_linear_503_3081" x1="8" y1="4" x2="8" y2="16" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#D81441"/>
+                    <stop offset="1" stop-color="#BB0831"/>
+                    </linearGradient>
+                    <clipPath id="clip0_503_3081">
+                    <rect width="28" height="20" rx="2" fill="white"/>
+                    </clipPath>
+                    </defs>
+                </svg>
+            </button>
+        </form>
+    </div> 
+</Wrapper>
+
+<style>
+    .languages {
+        margin: 1rem 0rem;
+    }
+
+    form {
+        width: 100%;
+    }
+    
+    .language {
+        padding: 0.25rem 0.5rem;
+        font-size: 1.125rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        width: 50%;
+        margin: 0.5rem auto 0rem auto;
+        background-color: rgba(0, 0, 0, 0.075);
+        border: solid 1px black;
+        cursor: pointer;
+    }
+
+    .language:hover, .language:focus {
+        font-weight: bold;
+        color: rgb(90, 46, 74);
+        border-left: solid 3px rgb(90, 46, 74);
+    }
+
+    .language:hover span, .language:focus span {
+        margin-left: -2px;
+    }
+
+    .language svg {
+        max-width: 1.25rem;
+        max-height: 1.25rem;
+    }
+</style>
+
+@code
+{
+    [Parameter]
+    public required string Token { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await _context.Init(Token, "en");
+        
+        if (_context.Party == null)
+        {
+            Navigation.NavigateTo("/not-found");
+        }
+    }
+
+    private void SetLangEn() => OnSubmit("en");
+    private void SetLangRo() => OnSubmit("ro");
+    private void SetLangJp() => OnSubmit("jp");
+
+    private void OnSubmit(string language)
+    {
+        if (_context.Party.Responded == null)
+        {
+            Navigation.NavigateTo($"/{language}/invite/{Token}/respond");
+        }
+        else
+        {
+            Navigation.NavigateTo($"/{language}/invite/{Token}/details");
+        }
+    }
+}

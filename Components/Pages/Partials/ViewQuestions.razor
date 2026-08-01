@@ -3,13 +3,13 @@
 
 <h2 id="questions">@_context.GetMessage("questions")</h2>
 
-<p>
+<p class="answer">
     <strong>
         @_context.GetMessage("questions.email"):
     </strong> @(_context.Party!.Email ?? "-")
 </p>
 
-<p>
+<p class="answer">
     <strong>
         @_context.GetMessage("questions.diet"):
     </strong> @(_context.Party!.Diet ?? "-")
@@ -27,7 +27,10 @@
     }
 
     #housed {
-        font-size: 0.8rem;
         margin-bottom: 0.125rem;
+    }
+
+    .answer strong {
+        display: block;
     }
 </style>
