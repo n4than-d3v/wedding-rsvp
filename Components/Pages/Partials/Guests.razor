@@ -35,7 +35,10 @@
     .guest {
         border-bottom: dotted 2px grey;
         margin-bottom: 0.25rem;
-        display: block;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding-bottom: 0.125rem;
         color: rgb(68, 68, 68);
         cursor: pointer;
     }
@@ -67,7 +70,6 @@
     }
 
     .guest .name {
-        padding-bottom: 0.25rem;
     }
 
     .guest input[type=checkbox]:checked + .box {

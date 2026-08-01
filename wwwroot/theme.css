@@ -19,7 +19,7 @@
 }
 
 .answer {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
 }
 
 #confirm-guests {
@@ -34,7 +34,7 @@ h2 {
 
 .guest .name {
     font-family: "Cormorant Upright", "Times New Roman", Times, serif;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
 }
 
 .guest .coming,
@@ -60,5 +60,6 @@ input[type="email"] {
     font-weight: 600;
 }
 
-.info a {
+.info a:not(.button) {
+    color: rgb(116, 45, 97);
 }
