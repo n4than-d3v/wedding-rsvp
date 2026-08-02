@@ -13,6 +13,7 @@ builder.Services.AddDbContext<WeddingContext>(opt =>
         builder.Configuration.GetConnectionString("PostgreSQL")));
 
 builder.Services.AddScoped<IGuestService, GuestService>();
+builder.Services.AddScoped<IAdminService, GuestService>();
 builder.Services.AddScoped<IContext, Context>();
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>

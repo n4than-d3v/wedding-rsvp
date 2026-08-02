@@ -1,0 +1,135 @@
+@page "/admin/rsvp-list"
+
+@using Wedding.DTOs
+@using Wedding.Services
+
+@inject IAdminService _service
+@inject IConfiguration _config
+
+<PageTitle>October 3rd</PageTitle>
+
+@if (_parties != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Party</th>
+                <th>Responded</th>
+                <th>Email</th>
+                <th>Diet</th>
+                <th>Guest</th>
+                <th>RSVP</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var party in _parties.OrderByDescending(p => p.Responded))
+            {
+                <tr class="party">
+                    <td>
+                        <a target="_blank" href="@($"/invite/{party.Token}")">@party.Name</a>
+                    </td>
+                    <td>@party.Responded?.ToString("dd MMM yyyy HH:mm")</td>
+                    <td>@party.Email</td>
+                    <td>@party.Diet</td>
+                    <td colspan="2"></td>
+                </tr>
+                @foreach (var guest in party.Guests.OrderBy(g => g.Id))
+                {
+                    <tr class="guest">
+                        <td colspan="4"></td>
+                        @if (guest.Name.Contains("1") && !string.IsNullOrEmpty(party.PlusOneName))
+                        {
+                            <td>@party.PlusOneName</td>
+                        }
+                        else
+                        {
+                            <td>@guest.Name</td>
+                        }
+                        @if (guest.Coming != null)
+                        {
+                            <td class="guest-status @((guest.Coming.Value ? "yes" : "no"))">@(guest.Coming.Value ? "Yes" : "No")</td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <form method="post" data-enhance @onsubmit="OnSubmit" @formname="Admin">
+        <AntiforgeryToken />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="Password" />
+        <button type="submit">Submit</button>
+    </form>
+}
+
+<style>
+    form {
+        border: solid 2px black;
+        margin: 2rem auto;
+        padding: 1rem;
+        max-width: 20rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    label, input {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: 2rem auto;
+        width: max-content;
+    }
+
+    thead tr th {
+        text-align: left;
+        border-bottom: solid 1px black;
+        padding: 0.25rem 0.5rem;
+    }
+
+    tbody tr td {
+        padding: 0.25rem 0.5rem;
+    }
+
+    .party {
+        background-color: #ddd;
+    }
+
+    .guest {
+        background-color: #eee;
+    }
+
+    .guest-status.yes {
+        background-color: rgb(197, 250, 197);
+    }
+
+    .guest-status.no {
+        background-color: rgb(255, 182, 193);
+    }
+</style>
+
+@code
+{
+    [SupplyParameterFromForm]
+    public string? Password { get; set; }
+
+    private IReadOnlyList<PartyDto>? _parties = null;
+
+    private async Task OnSubmit()
+    {
+        if (Password == _config["AdminPassword"])
+        {
+            _parties = await _service.GetParties();   
+        }
+    }
+}

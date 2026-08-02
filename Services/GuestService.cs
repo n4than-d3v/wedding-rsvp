@@ -12,8 +12,22 @@ public interface IGuestService
     Task<PartyDto> Rsvp(RsvpCommand command);
 }
 
-public class GuestService(WeddingContext database) : IGuestService
+public interface IAdminService
 {
+    Task<IReadOnlyList<PartyDto>> GetParties();
+}
+
+public class GuestService(WeddingContext database) : IGuestService, IAdminService
+{
+    public async Task<IReadOnlyList<PartyDto>> GetParties()
+    {
+        var parties = await database.Parties
+            .Include(p => p.Guests)
+            .ToListAsync();
+
+        return [.. parties.Select(Map)];
+    }
+
     public async Task<PartyDto?> GetPartyByToken(string token)
     {
         var party = await database.Parties
