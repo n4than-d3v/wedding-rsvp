@@ -15,11 +15,6 @@
     </strong> @(_context.Party!.Diet ?? "-")
 </p>
 
-@if (_context.Party.Housed)
-{
-    <p id="housed">@_context.GetMessage("housed")</p>
-}
-
 <style>
     input {
         background-color: transparent;

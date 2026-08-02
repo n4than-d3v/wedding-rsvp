@@ -16,6 +16,11 @@
 
 <h2 class="heading">@_context.GetMessage("logistics.hotels")</h2>
 
+@if (_context.Party!.Housed)
+{
+    <p class="info push">@_context.GetMessage("housed")</p>
+}
+
 <p class="info">
     <a target="_blank" href="https://www.farnhamhousehotel.com/">Farnham House Hotel</a> (1 mile)<br />
     <a target="_blank" href="https://farnhambush.com/reserve/">Bush Hotel Farnham</a> (2 miles)<br />
