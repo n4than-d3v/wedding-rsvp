@@ -1,0 +1,52 @@
+@using Wedding.Services
+@inject IContext _context
+
+<div class="guests">
+    <label class="guest no-border" for="can">
+        <input type="radio"
+            id="can"
+            name="Can"
+            value="yes"
+            checked="@(_context.Party!.Guests.Any(g => g.Coming ?? false))" />
+        <span class="box">
+            <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <title/>
+                <g id="Complete">
+                    <g id="tick">
+                        <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                </g>
+            </svg>
+        </span>
+        <span class="can-text">
+            @_context.GetMessage("can")
+        </span>
+    </label>
+    <label class="guest no-border" for="cannot">
+        <input type="radio"
+            id="cannot"
+            name="Can"
+            value="no"
+            checked="@(_context.Party!.Guests.All(g => g.Coming == false))" />
+        <span class="box">
+            <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <title/>
+                <g id="Complete">
+                    <g id="tick">
+                        <polyline fill="none" points="3.7 14.3 9.6 19 20.3 5" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                </g>
+            </svg>
+        </span>
+        <span class="can-text">
+            @_context.GetMessage("cannot")
+        </span>
+    </label>
+</div>
+
+<style>
+    .guest.no-border {
+        border-bottom: none;
+        margin-bottom: 0.5rem;
+    }
+</style>

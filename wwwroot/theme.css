@@ -12,7 +12,7 @@
     font-size: 2.125rem;
 }
 
-.sorry, .thank-you, .answer, .info, #arrival, #confirm-guests, #housed {
+.sorry, .thank-you, .answer, .info, #arrival, #confirm-guests, #housed, .can-text {
     font-family: "Lora", "Times New Roman", Times, serif;
     font-size: 0.825rem;
     margin: 0rem;

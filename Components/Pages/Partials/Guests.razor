@@ -73,16 +73,19 @@
     .guest .name {
     }
 
-    .guest input[type=checkbox]:checked + .box {
+    .guest input[type=checkbox]:checked + .box,
+    .guest input[type=radio]:checked + .box {
         border-color: black;
     }
 
-    .guest input[type=checkbox]:checked + .box + .name {
+    .guest input[type=checkbox]:checked + .box + .name,
+    .guest input[type=radio]:checked + .box + .can-text {
         color: black;
         font-weight: bold;
     }
 
-    .guest input[type=checkbox]:checked + .box svg {
+    .guest input[type=checkbox]:checked + .box svg,
+    .guest input[type=radio]:checked + .box svg {
         display: initial;
     }
 </style>

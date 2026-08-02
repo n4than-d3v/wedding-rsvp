@@ -6,13 +6,13 @@
 <p class="answer">
     <strong>
         @_context.GetMessage("questions.email")
-    </strong> @(_context.Party!.Email ?? "-")
+    </strong> @(string.IsNullOrWhiteSpace(_context.Party!.Email) ? "-" : _context.Party!.Email)
 </p>
 
 <p class="answer">
     <strong>
         @_context.GetMessage("questions.diet")
-    </strong> @(_context.Party!.Diet ?? "-")
+    </strong> @(string.IsNullOrWhiteSpace(_context.Party!.Diet) ? "-" : _context.Party!.Diet)
 </p>
 
 <style>

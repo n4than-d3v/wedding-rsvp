@@ -17,14 +17,28 @@
             <AntiforgeryToken />
         
             <Invitation />
-            
-            <Guests />
-            <Questions />
+
+            <YesNo />
+
+            <div id="if-accept">            
+                <Guests />
+                <Questions />
+            </div>
 
             <Button Save="true" />
         </form>
     </Wrapper>
 }
+
+<style>
+    #if-accept {
+        display: none;
+    }
+
+    form:has(#can:checked) #if-accept {
+        display: block;
+    }
+</style>
 
 @code
 {
@@ -44,6 +58,9 @@
     public string? PlusOneName { get; set; } = string.Empty;
 
     [SupplyParameterFromForm]
+    public string? Can { get; set; } = string.Empty;
+
+    [SupplyParameterFromForm]
     public int[] GuestsComing { get; set; } = [];
 
     protected override async Task OnParametersSetAsync()
@@ -59,7 +76,7 @@
             Email = Email,
             Diet = Diet,
             PlusOneName = PlusOneName,
-            GuestsComing = GuestsComing
+            GuestsComing = Can == "yes" ? GuestsComing : []
         };
 
         await _service.Rsvp(command);
