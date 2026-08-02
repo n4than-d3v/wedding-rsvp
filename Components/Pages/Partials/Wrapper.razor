@@ -7,11 +7,11 @@
     <img id="top-left-img" class="top-image" src="@Assets["images/floral-top-left.png"]" alt="" />
     <img id="top-right-img" class="top-image" src="@Assets["images/floral-top-right.png"]" alt="" />
 
-    <header>
+    <header class="@(_context.GetMessage("header.switch") == "no" ? "header--regular" : "header--switch")">
         <h2 id="tagline">@_context.GetMessage("subtitle")</h2>
         <h3 id="names">@_context.GetMessage("our-names")</h3>
     </header>
-
+    
     @ChildContent
 </main>
 
@@ -64,6 +64,15 @@
     header {
         margin-top: 1rem;
         margin-bottom: 1.35rem;
+        display: flex;
+    }
+
+    .header--regular {
+        flex-direction: column;
+    }
+
+    .header--switch {
+        flex-direction: column-reverse;
     }
 
     header * {

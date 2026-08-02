@@ -41,6 +41,9 @@
     public string Diet { get; set; } = string.Empty;
 
     [SupplyParameterFromForm]
+    public string? PlusOneName { get; set; } = string.Empty;
+
+    [SupplyParameterFromForm]
     public int[] GuestsComing { get; set; } = [];
 
     protected override async Task OnParametersSetAsync()
@@ -55,6 +58,7 @@
             Token = Token,
             Email = Email,
             Diet = Diet,
+            PlusOneName = PlusOneName,
             GuestsComing = GuestsComing
         };
 

@@ -23,5 +23,7 @@ public class Party
 
     public string? Diet { get; set; }
 
+    public string? PlusOneName { get; set; }
+
     public List<Guest> Guests { get; set; }
 }

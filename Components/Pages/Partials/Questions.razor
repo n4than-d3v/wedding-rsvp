@@ -13,12 +13,28 @@
     <input type="text" id="diet" name="Diet" value="@_context.Party!.Diet" placeholder="@_context.GetMessage("questions.diet.placeholder")" />
 </div>
 
+@if (_context.Party.Guests.Any(g => g.Name.Contains("1")))
+{
+    <div id="plus-one-field" class="field">        
+        <label for="plus-one-name">@_context.GetMessage("questions.name.plus1")</label>
+        <input type="text" id="plus-one-name" name="PlusOneName" value="@_context.Party!.PlusOneName" />
+    </div>
+}
+
 @if (_context.Party.Housed)
 {
     <p id="housed">@_context.GetMessage("housed")</p>
 }
 
 <style>
+    #plus-one-field {
+        display: none;
+    }
+    
+    form:has(.plus-one-checkbox:checked) #plus-one-field {
+        display: block;
+    }
+
     .field {
         margin-bottom: 0.25rem;
         padding-bottom: 0.125rem;

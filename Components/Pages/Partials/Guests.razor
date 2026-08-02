@@ -11,6 +11,7 @@
         <label class="guest" for="guest-@guest.Id">
             <input type="checkbox"
                 id="guest-@guest.Id"
+                class="@(guest.Name.Contains("1") ? "plus-one-checkbox" : "")"
                 name="GuestsComing"
                 value="@guest.Id"
                 checked="@(guest.Coming == true)" />

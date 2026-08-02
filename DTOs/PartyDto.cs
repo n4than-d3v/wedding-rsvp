@@ -20,6 +20,8 @@ public class PartyDto
 
     public string? Diet { get; set; }
 
+    public string? PlusOneName { get; set; }
+
     public List<GuestDto> Guests { get; set; }
 
     public bool AnyComing => Guests?.Any(x => x.Coming ?? false) ?? false;

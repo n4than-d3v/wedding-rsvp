@@ -9,4 +9,6 @@ public class RsvpCommand
     public required int[] GuestsComing { get; set; }
 
     public string? Diet { get; set; }
+
+    public string? PlusOneName { get; set; }
 }

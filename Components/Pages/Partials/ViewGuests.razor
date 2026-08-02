@@ -7,9 +7,18 @@
     @foreach (var guest in _context.Party!.Guests.OrderBy(g => g.Id))
     {
         <p class="guest">
-            <span class="name">
-                @guest.Name
-            </span>
+            @if (guest.Name.Contains("1"))
+            {
+                <span class="name">
+                    @_context.Party.PlusOneName
+                    <span class="plus-one-status">(+ 1)</span>
+                </span>
+            }
+            else {
+                <span class="name">
+                    @guest.Name
+                </span>
+            }
             @if (guest.Coming ?? false)
             {
                 <span class="coming">
@@ -42,6 +51,12 @@
     .guest .name {
         flex: 1;
         color: black;
+    }
+
+    .plus-one-status {
+        font-size: 0.8rem;
+        color: rgb(74, 38, 61);
+        margin-left: 0.125rem;
     }
 
     .guest .coming,
