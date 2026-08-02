@@ -36,11 +36,8 @@ public class GuestService(WeddingContext database) : IGuestService, IAdminServic
         
         if (party == null) return null;
 
-        if (party.Seen == null)
-        {
-            party.Seen = DateTime.UtcNow;
-            await database.SaveChangesAsync();
-        }
+        party.Seen = DateTime.UtcNow;
+        await database.SaveChangesAsync();
 
         return Map(party);
     }
