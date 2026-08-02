@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var party in _parties.OrderByDescending(p => p.Responded))
+            @foreach (var party in _parties.OrderByDescending(p => p.Responded).ThenBy(p => p.Id))
             {
                 <tr class="party">
                     <td>
