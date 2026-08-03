@@ -18,6 +18,8 @@
                 <th>Responded</th>
                 <th>Email</th>
                 <th>Diet</th>
+                <th>Arrival</th>
+                <th>Housed</th>
                 <th>Guest</th>
                 <th>RSVP</th>
             </tr>
@@ -33,12 +35,14 @@
                     <td>@party.Responded?.ToString("dd MMM yyyy HH:mm")</td>
                     <td>@party.Email</td>
                     <td>@party.Diet</td>
+                    <td>Day @(party.Arrival)</td>
+                    <td>@(party.Housed ? "Yes" : "No")</td>
                     <td colspan="2"></td>
                 </tr>
                 @foreach (var guest in party.Guests.OrderBy(g => g.Id))
                 {
                     <tr class="guest">
-                        <td colspan="5"></td>
+                        <td colspan="7"></td>
                         @if (guest.Name.Contains("1") && !string.IsNullOrEmpty(party.PlusOneName))
                         {
                             <td>@party.PlusOneName</td>
