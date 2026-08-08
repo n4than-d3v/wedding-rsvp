@@ -46,5 +46,25 @@ app.UseAntiforgery();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>();
+app.MapGet("/api/{token}", async (IGuestService guestService, string token) =>
+{
+    var party = await guestService.GetPartyByToken(token, false);
+    if (party == null)
+    {
+        return Results.Ok(new
+        {
+            status = "N/A",
+            invited = 0,
+            coming = 0
+        });
+    }
+
+    return Results.Ok(new
+    {
+        status = party.Responded == null ? (party.Seen == null ? "Not seen" : "Seen") : party.AnyComing ? "Coming" : "Not coming",
+        invited = party.Guests.Count,
+        coming = party.Guests.Count(g => g.Coming ?? false)
+    });
+});
 
 app.Run();

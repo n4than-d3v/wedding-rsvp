@@ -8,7 +8,7 @@ namespace Wedding.Services;
 
 public interface IGuestService
 {
-    Task<PartyDto?> GetPartyByToken(string token);
+    Task<PartyDto?> GetPartyByToken(string token, bool markSeen);
     Task<PartyDto> Rsvp(RsvpCommand command);
 }
 
@@ -28,7 +28,7 @@ public class GuestService(WeddingContext database) : IGuestService, IAdminServic
         return [.. parties.Select(Map)];
     }
 
-    public async Task<PartyDto?> GetPartyByToken(string token)
+    public async Task<PartyDto?> GetPartyByToken(string token, bool markSeen)
     {
         var party = await database.Parties
             .Include(p => p.Guests)
@@ -36,8 +36,11 @@ public class GuestService(WeddingContext database) : IGuestService, IAdminServic
         
         if (party == null) return null;
 
-        party.Seen = DateTime.UtcNow;
-        await database.SaveChangesAsync();
+        if (markSeen)
+        {
+            party.Seen = DateTime.UtcNow;
+            await database.SaveChangesAsync();
+        }
 
         return Map(party);
     }

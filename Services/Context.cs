@@ -9,7 +9,7 @@ public interface IContext
     PartyDto? Party { get; }
     string GetMessage(string key);
 
-    Task Init(string token, string language);
+    Task Init(string token, string language, bool markSeen);
 }
 
 public class Context(IConfiguration configuration, IGuestService guestService) : IContext
@@ -29,13 +29,13 @@ public class Context(IConfiguration configuration, IGuestService guestService) :
         .GetSection(language)
         .GetValue<string>(key) ?? key;
     
-    public async Task Init(string token, string language)
+    public async Task Init(string token, string language, bool markSeen)
     {
         if (!Languages.Contains(language))
             throw new Exception("Invalid language provided");
 
         this.token = token;
         this.language = language;
-        this.party = await guestService.GetPartyByToken(token);
+        this.party = await guestService.GetPartyByToken(token, markSeen);
     }
 }

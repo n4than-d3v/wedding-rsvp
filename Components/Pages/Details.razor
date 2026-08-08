@@ -39,7 +39,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        await _context.Init(Token, Language);
+        await _context.Init(Token, Language, true);
 
     }
 }

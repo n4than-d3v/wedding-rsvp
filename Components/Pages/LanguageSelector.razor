@@ -146,7 +146,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        await _context.Init(Token, "en");
+        await _context.Init(Token, "en", false);
         
         if (_context.Party == null)
         {
