@@ -10,6 +10,7 @@
     <header class="@(_context.GetMessage("header.switch") == "no" ? "header--regular" : "header--switch")">
         <h2 id="tagline">@_context.GetMessage("subtitle")</h2>
         <h3 id="names">@_context.GetMessage("our-names")</h3>
+        <h4 id="date">@_context.GetMessage("date")</h4>
     </header>
     
     @ChildContent
@@ -87,7 +88,13 @@
 
     header #names {
         text-align: center;
-    }    
+    }
+
+    header #date {
+        color: rgb(108, 108, 108);
+        text-align: center;
+        padding-top: 0.25rem;
+    }
 </style>
 
 @code
